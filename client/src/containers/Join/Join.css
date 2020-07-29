@@ -1,22 +1,47 @@
+:root {
+    --dark-color-a: #667aff;
+    --dark-color-b: #7386ff;
+    --light-color: #e6e9ff;
+    --success-color: #5cb85c;
+    --error-color: #d9534f;
+  }
+
 
 .JoinContainer {
     max-width: 500px;
     margin: 80px auto;
     color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background: darkcyan;
+    border-radius: 20px;
     
+}
+
+.Form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .JoinHeader {
     text-align: center;
-    padding: 20px;
-    background: var(--dark-color-a);
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .JoinMain {
     padding: 30px 40px;
-    background: var(--dark-color-b);
+    width: 100%;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
 }
 
 .JoinMain p {
@@ -25,6 +50,7 @@
 
 .FormControl{
     margin-bottom: 20px;
+    width: 90%;
 }
 
 .Label{
@@ -34,9 +60,10 @@
 
 .Input {
     font-size: 16px;
-    padding: 5px;
-    height: 40px;
-    width: 100%;
+    margin: 0;
+    padding: 0px;
+    height: 39px;
+    width: 99%;
 }
 
 .RoomSelect {
@@ -47,7 +74,13 @@
 }
 
 
-button {
+.JoinBtn {
     margin-top: 20px;
-    width: 100%;
+    cursor: pointer;
+    padding: 10px 14px;
+    background: var(--light-color);
+    color: darkcyan;
+    border: 0;
+    font-size: 17px;
+    border-radius: 7px;
 }
