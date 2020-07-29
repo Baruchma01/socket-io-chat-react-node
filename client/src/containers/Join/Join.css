@@ -1,0 +1,53 @@
+
+.JoinContainer {
+    max-width: 500px;
+    margin: 80px auto;
+    color: #fff;
+    
+}
+
+.JoinHeader {
+    text-align: center;
+    padding: 20px;
+    background: var(--dark-color-a);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.JoinMain {
+    padding: 30px 40px;
+    background: var(--dark-color-b);
+}
+
+.JoinMain p {
+    margin-bottom: 20px;
+}
+
+.FormControl{
+    margin-bottom: 20px;
+}
+
+.Label{
+    display: block;
+    margin-bottom: 5px;
+}
+
+.Input {
+    font-size: 16px;
+    padding: 5px;
+    height: 40px;
+    width: 100%;
+}
+
+.RoomSelect {
+    font-size: 16px;
+    padding: 5px;
+    height: 40px;
+    width: 100%;
+}
+
+
+button {
+    margin-top: 20px;
+    width: 100%;
+}
