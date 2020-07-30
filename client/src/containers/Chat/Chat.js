@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import classes from "./Chat.css";
 import openSocket from "socket.io-client";
 const socket = openSocket(process.env.REACT_APP_API_URI);
-
 const Chat = ({ location }) => {
   const [msg, setMsg] = useState("");
   const [roomMessage, setRoomMessage] = useState([]);
