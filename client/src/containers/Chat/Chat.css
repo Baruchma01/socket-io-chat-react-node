@@ -1,12 +1,10 @@
 .ChatContainer {
-    background: #fff;
-    margin: 30px auto;
-    overflow: hidden;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 80%;
     flex-direction: column;
+    width: 65%;
+    margin: 30px auto;
 }
 
 .ChatHeader {
@@ -51,15 +49,16 @@ ul li {
 
 .ChatMessage {
     padding: 30px;
-    max-height: 500px;
+    max-height: 310px;
     overflow-y: scroll;
+    border-right: 8px solid darkcyan;
 }
 
 .Message {
     padding: 10px;
     margin-bottom: 15px;
-    background-color: var(--light-color);
     border-radius: 5px;
+    box-shadow: 0 0 4px 0;
 }
 
 .Meta {

@@ -11,10 +11,11 @@
     color: #fff;
     display: flex;
     flex-wrap: wrap;
-    height: -webkit-fill-available;
     justify-content: center;
     align-items: center;
     background: darkcyan;
+    width: 50%;
+    margin: 5rem auto;
 }
 
 .Form {

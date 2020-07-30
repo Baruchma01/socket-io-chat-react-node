@@ -29,7 +29,7 @@ const Chat = ({ location }) => {
   const submitMessageHandler = (e) => {
     e.preventDefault();
     if (msg.length === 0) {
-      return console.log("error: empty msg");
+      alert("error: empty msg");
     } else {
       socket.emit("chatMessage", msg);
       setMsg('');
