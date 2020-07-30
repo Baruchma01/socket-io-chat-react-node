@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
     console.log(res);
-  res.send({ response: "I am alive" }).status(200);
+  res.send("Opps, wrong address@").status(200);
 });
 
 module.exports = router;
