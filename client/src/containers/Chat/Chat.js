@@ -45,7 +45,9 @@ const Chat = ({ location }) => {
         <h1>
           <i className="fas fa-smile"></i> ChatCord
         </h1>
-        <a className={classes.Btn}>Leave Room</a>
+        <a href="/" className={classes.Btn}>
+          Leave Room
+        </a>
       </header>
       <main className={classes.ChatMain}>
         <div className={classes.ChatSideBar}>
