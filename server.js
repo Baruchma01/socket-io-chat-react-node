@@ -3,6 +3,8 @@ const express = require("express");
 const http = require("http");
 const socketio = require("socket.io");
 const formatMessage = require("./utils/message");
+const index = require("./routes/index");
+
 const {
   userJoin,
   getCurrentUser,
@@ -16,11 +18,12 @@ const io = socketio(server);
 
 const botName = "Chat Bot";
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(index);
 
 //Run when client connets
 io.on("connection", (socket) => {
   socket.on("joinRoom", ({ username, room }) => {
+    console.log(socket.id);
     const user = userJoin(socket.id, username, room);
     socket.join(user.room);
 
@@ -44,12 +47,14 @@ io.on("connection", (socket) => {
 
   // Listen for chatMessage
   socket.on("chatMessage", (msg) => {
+    console.log(socket.id);
     const user = getCurrentUser(socket.id);
     io.to(user.room).emit("message", formatMessage(user.username, msg));
   });
 
   //When client disconnect
   socket.on("disconnect", () => {
+    console.log(socket.id + ' ' + 'Disconnect');
     const user = userLeave(socket.id);
     if (user) {
       io.to(user.room).emit(

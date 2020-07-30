@@ -1,8 +1,43 @@
-import React from "react";
-import classes from './Chat.css'
+import React, { useState, useEffect } from "react";
+import classes from "./Chat.css";
+import openSocket from "socket.io-client";
+const socket = openSocket("http://localhost:5000");
 
 const Chat = ({ location }) => {
+  const [msg, setMsg] = useState("");
+  const [roomMessage, setRoomMessage] = useState([]);
+  const [activeUsers, setActiveUsers] = useState([]);
+  const [currentRoom, setCurrentRoom] = useState("");
+
   const { username, room } = location.state.user;
+
+  useEffect(() => {
+    socket.emit("joinRoom", { username, room });
+  }, []);
+
+  // Get message from the server
+  socket.on("message", (message) => {
+    setRoomMessage([...roomMessage, message]);
+  });
+
+  // Get room and users
+  socket.on("roomUsers", ({ room, users }) => {
+    setActiveUsers(users);
+    setCurrentRoom(room);
+  });
+
+  const submitMessageHandler = (e) => {
+    e.preventDefault();
+    if (msg.length === 0) {
+      return console.log("error: empty msg");
+    } else {
+      socket.emit("chatMessage", msg);
+    }
+  };
+
+  const handleMsgChange = (e) => {
+    setMsg(e.target.value);
+  };
 
   return (
     <div className={classes.ChatContainer}>
@@ -10,32 +45,32 @@ const Chat = ({ location }) => {
         <h1>
           <i className="fas fa-smile"></i> ChatCord
         </h1>
-        <a className={classes.Btn}>
-          Leave Room
-        </a>
+        <a className={classes.Btn}>Leave Room</a>
       </header>
       <main className={classes.ChatMain}>
         <div className={classes.ChatSideBar}>
           <h3>
             <i className="fas fa-comments"></i> Room Name:
           </h3>
-          <h2 id="room-name">JavaScript</h2>
+          <h2 id="room-name">{currentRoom}</h2>
           <h3>
             <i className="fas fa-users"></i> Users
           </h3>
           <ul id="users">
-              <li>
-                  Baruch
-              </li>
+            {(activeUsers || []).map((user) => (
+              <li key={user.id}>{user.username}</li>
+            ))}
           </ul>
         </div>
         <div className={classes.ChatMessage}>
-          <div className={classes.Message}>
-            <p className={classes.Meta}>
-              UserName <span>12:30PM</span>
-            </p>
-            <p className="text">Hello World</p>
-          </div>
+          {(roomMessage || []).map((message) => (
+            <div key={Math.random()} className={classes.Message}>
+              <p className={classes.Meta}>
+                {message.username} <span>{message.time}</span>
+              </p>
+              <p className="text">{message.text}</p>
+            </div>
+          ))}
         </div>
       </main>
       <div className={classes.ChatFormContainer}>
@@ -44,9 +79,10 @@ const Chat = ({ location }) => {
             id="msg"
             type="text"
             placeholder="Enter Message"
-            required
+            value={msg}
+            onChange={handleMsgChange}
           />
-          <button className={classes.Btn} onClick={(e) => e.preventDefault()}>
+          <button className={classes.Btn} onClick={submitMessageHandler}>
             <i className="fas fa-paper-plane"></i> Send
           </button>
         </form>

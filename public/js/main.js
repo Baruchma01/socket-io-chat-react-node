@@ -19,7 +19,6 @@ socket.on("roomUsers", ({ room, users }) => {
 
 // Get message from the server
 socket.on("message", (message) => {
-  console.log(message);
   outputMessage(message);
 
   //Scroll after message
