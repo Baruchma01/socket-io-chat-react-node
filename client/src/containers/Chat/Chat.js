@@ -32,6 +32,7 @@ const Chat = ({ location }) => {
       return console.log("error: empty msg");
     } else {
       socket.emit("chatMessage", msg);
+      setMsg('');
     }
   };
 
