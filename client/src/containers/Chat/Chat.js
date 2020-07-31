@@ -14,16 +14,18 @@ const Chat = ({ location }) => {
     socket.emit("joinRoom", { username, room });
   }, []);
 
-  // Get message from the server
-  socket.on("message", (message) => {
-    setRoomMessage([...roomMessage, message]);
-  });
+  useEffect(() => {
+    // Get message from the server
+    socket.on("message", (message) => {
+      setRoomMessage((state) => [...state, message]);
+    });
 
-  // Get room and users
-  socket.on("roomUsers", ({ room, users }) => {
-    setActiveUsers(users);
-    setCurrentRoom(room);
-  });
+    // Get room and users
+    socket.on("roomUsers", ({ room, users }) => {
+      setActiveUsers((state) => users);
+      setCurrentRoom((state) => room);
+    });
+  }, []);
 
   const submitMessageHandler = (e) => {
     e.preventDefault();
@@ -31,7 +33,7 @@ const Chat = ({ location }) => {
       alert("error: empty msg");
     } else {
       socket.emit("chatMessage", msg);
-      setMsg('');
+      setMsg("");
     }
   };
 
