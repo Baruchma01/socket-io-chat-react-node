@@ -4,7 +4,7 @@
     --light-color: #e6e9ff;
     --success-color: #5cb85c;
     --error-color: #d9534f;
-  }
+}
 
 
 .JoinContainer {
@@ -46,12 +46,12 @@
     margin-bottom: 20px;
 }
 
-.FormControl{
+.FormControl {
     margin-bottom: 20px;
     width: 90%;
 }
 
-.Label{
+.Label {
     display: block;
     margin-bottom: 5px;
 }
@@ -81,4 +81,18 @@
     border: 0;
     font-size: 17px;
     border-radius: 7px;
+}
+
+@media only screen and (max-width: 600px) {
+    .JoinContainer {
+        color: #fff;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        background: darkcyan;
+        height: 100vh;
+        width: 100%;
+        margin: 0;
+    }
 }

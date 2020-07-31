@@ -60,11 +60,11 @@ const Chat = ({ location }) => {
           <h3>
             <i className="fas fa-users"></i> Users
           </h3>
-          <ul id="users">
+          <div id="users">
             {(activeUsers || []).map((user) => (
-              <li key={user.id}>{user.username}</li>
+              <p key={user.id}>{user.username}</p>
             ))}
-          </ul>
+          </div>
         </div>
         <div className={classes.ChatMessage}>
           {(roomMessage || []).map((message) => (
