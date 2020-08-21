@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import classes from "./Chat.css";
 import openSocket from "socket.io-client";
 import Spinner from "../../components/Spinner/Spinner";
 
 const socket = openSocket(process.env.REACT_APP_API_URI);
 const Chat = ({ location }) => {
+  const divRref = useRef(null);
   const [msg, setMsg] = useState("");
   const [roomMessage, setRoomMessage] = useState([]);
   const [activeUsers, setActiveUsers] = useState([]);
@@ -20,6 +21,7 @@ const Chat = ({ location }) => {
     // Get message from the server
     socket.on("message", (message) => {
       setRoomMessage((state) => [...state, message]);
+      divRref.current.scrollIntoView({behavior: 'smooth' });
     });
 
     // Get room and users
@@ -43,7 +45,6 @@ const Chat = ({ location }) => {
     setMsg(e.target.value);
   };
 
-  console.log(socket.connected);
   return (
     <>
       {!socket.connected ? (
@@ -75,7 +76,7 @@ const Chat = ({ location }) => {
             </div>
             <div className={classes.ChatMessage}>
               {(roomMessage || []).map((message) => (
-                <div key={Math.random()} className={classes.Message}>
+                <div ref={divRref} key={Math.random()} className={classes.Message}>
                   <p className={classes.Meta}>
                     {message.username} <span>{message.time}</span>
                   </p>
