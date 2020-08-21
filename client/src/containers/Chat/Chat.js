@@ -21,7 +21,9 @@ const Chat = ({ location }) => {
     // Get message from the server
     socket.on("message", (message) => {
       setRoomMessage((state) => [...state, message]);
-      divRref.current.scrollIntoView({behavior: 'smooth' });
+      if (roomMessage.length > 0) {
+        divRref.current.scrollIntoView({ behavior: "smooth" });
+      }
     });
 
     // Get room and users
@@ -51,7 +53,22 @@ const Chat = ({ location }) => {
         <Spinner />
       ) : (
         <div className={classes.ChatContainer}>
-          <header className={classes.ChatHeader}>
+          <div className={classes.ChatHeader}>
+            
+            <div className={classes.Dots}>
+              <i className="fa fa-circle fa-xs" style={{color: '#f57e7d'}}></i>
+              <i className="fa fa-circle fa-xs" style={{color: '#ffc881'}}></i>
+              <i className="fa fa-circle fa-xs" style={{color: '#82cf85'}}></i>
+            </div>
+            <div>
+              <p style={{ margin: 0 }}>Code Chat</p>
+            </div>
+            <div>
+              <i class="fa fa-expand"></i>
+            </div>
+          </div>
+
+          {/* <header className={classes.ChatHeader}>
             <h1>
               <i className="fas fa-smile"></i> ChatCord
             </h1>
@@ -98,7 +115,7 @@ const Chat = ({ location }) => {
                 <i className="fas fa-paper-plane"></i> Send
               </button>
             </form>
-          </div>
+          </div> */}
         </div>
       )}
     </>
