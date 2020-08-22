@@ -47,6 +47,18 @@ const Chat = ({ location }) => {
     setMsg(e.target.value);
   };
 
+  const greenDot = {
+    color: '#82cf85' 
+  }
+
+  const specialColor = {
+    color: '#79889d'
+  }
+
+  const liGray = {
+    background: '#e4eaee'
+  }
+
   return (
     <>
       {!socket.connected ? (
@@ -79,25 +91,64 @@ const Chat = ({ location }) => {
             <div className={classes.ConversationList}>
               <ul>
                 <div className={classes.List}>
-                  <i class="fa fa-list-alt"></i>
+                  <i style={specialColor} className="fa fa-list-alt fa-xs"></i>
                   <li>Dashboard</li>
                 </div>
                 <div className={classes.List}>
+                <i style={specialColor} className="fa fa-user fa-xs"></i>
                   <li>Team chat</li>
                 </div>
                 <div className={classes.List}>
+                <i style = {greenDot} className="fa fa-circle-o online fa-xs"></i>
                   <li>baruch</li>
                 </div>
                 <div className={classes.List}>
+                <i style = {greenDot} className="fa fa-circle-o online fa-xs"></i>
                   <li>moshe</li>
                 </div>
                 <div className={classes.List}>
+                <i style = {greenDot} className="fa fa-circle-o online fa-xs"></i>
                   <li>eran</li>
                 </div>
               </ul>
+              <div className={classes.ButtomList}>
+                  <i style={specialColor} className="fa fa-list-alt fa-xs"></i>
+                  <p>Baruch Mashasha</p>
+                </div>
             </div>
 
-            <div className={classes.ChatArea}></div>
+            <div className={classes.ChatArea}>
+              <div className={classes.Title}>
+              <b>Conversation title</b>
+              </div>
+              <ul style={liGray} className={classes.MessageArea}>
+                <li className={classes.MessageLi}>
+
+                  <div className={classes.MsgName}>
+                  <span class="">Cucu Ionel</span>
+                  </div>
+
+                  <div className={classes.Msg}>
+                  <p>Hey, do you like the new interface? It's done with Font Awesome.</p>
+                  {/* <span class="msg-time">5:00 pm</span> */}
+                  </div>
+                </li>
+              </ul>
+
+              <ul className={classes.MessageArea}>
+                <li className={classes.MessageLi}>
+
+                  <div className={classes.MsgName}>
+                  <span class="">Baruch Ionel</span>
+                  </div>
+
+                  <div className={classes.Msg}>
+                  <p>Hey, all good.</p>
+                  {/* <span class="msg-time">5:00 pm</span> */}
+                  </div>
+                </li>
+              </ul>
+            </div>
 
             <div className={classes.RightTabs}></div>
           </div>
