@@ -1,6 +1,7 @@
 .ChatContainer {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     background: #fff;
     width: 780px;
     margin: 30px auto;
@@ -13,14 +14,72 @@
 .ChatHeader {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    height: 40px;
+    justify-content: space-around;
     width: 100%;
-    padding: 1rem;
+    align-items: center;
+    flex: 1;
+    border-bottom: 1px solid #cfdae1;
 }
 
 .Dots {
     display: flex;
     gap: 5px;
     flex-wrap: wrap;
+}
+
+.ChatSection {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: purple;
+    flex: 10;
+}
+
+.ConversationList {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    background-color: #505d71;
+    gap: 16px;
+}
+
+.ChatArea {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    background-color: #fff;
+}
+
+.RightTabs {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    background-color: #fff;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.List {
+    width: 100%;
+    display: flex;
+    border-bottom: 2px solid #586476;
+    align-items: center;
+    gap: 10px;
+    padding-left: 15px;
+}
+
+li {
+    padding: 0.7rem 0rem;
+    color: #fff;
+}
+
+i {
 }

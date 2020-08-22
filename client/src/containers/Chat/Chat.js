@@ -54,11 +54,19 @@ const Chat = ({ location }) => {
       ) : (
         <div className={classes.ChatContainer}>
           <div className={classes.ChatHeader}>
-            
             <div className={classes.Dots}>
-              <i className="fa fa-circle fa-xs" style={{color: '#f57e7d'}}></i>
-              <i className="fa fa-circle fa-xs" style={{color: '#ffc881'}}></i>
-              <i className="fa fa-circle fa-xs" style={{color: '#82cf85'}}></i>
+              <i
+                className="fa fa-circle fa-xs"
+                style={{ color: "#f57e7d" }}
+              ></i>
+              <i
+                className="fa fa-circle fa-xs"
+                style={{ color: "#ffc881" }}
+              ></i>
+              <i
+                className="fa fa-circle fa-xs"
+                style={{ color: "#82cf85" }}
+              ></i>
             </div>
             <div>
               <p style={{ margin: 0 }}>Code Chat</p>
@@ -66,6 +74,32 @@ const Chat = ({ location }) => {
             <div>
               <i class="fa fa-expand"></i>
             </div>
+          </div>
+          <div className={classes.ChatSection}>
+            <div className={classes.ConversationList}>
+              <ul>
+                <div className={classes.List}>
+                  <i class="fa fa-list-alt"></i>
+                  <li>Dashboard</li>
+                </div>
+                <div className={classes.List}>
+                  <li>Team chat</li>
+                </div>
+                <div className={classes.List}>
+                  <li>baruch</li>
+                </div>
+                <div className={classes.List}>
+                  <li>moshe</li>
+                </div>
+                <div className={classes.List}>
+                  <li>eran</li>
+                </div>
+              </ul>
+            </div>
+
+            <div className={classes.ChatArea}></div>
+
+            <div className={classes.RightTabs}></div>
           </div>
 
           {/* <header className={classes.ChatHeader}>
