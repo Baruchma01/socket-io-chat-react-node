@@ -5,13 +5,27 @@ import Spinner from "../../components/Spinner/Spinner";
 
 const socket = openSocket(process.env.REACT_APP_API_URI);
 const Chat = ({ location }) => {
+  const fullScreen = {
+    chatContainer: {
+      width: '100%',
+      margin: '0 auto',
+      height: '100vh'
+    },
+    inputArea: {
+      marginTop: 'auto'
+    }
+
+  }
+
   const divRref = useRef(null);
   const [msg, setMsg] = useState("");
+  const [isFullScreen, setIsFullScreen] = useState(false);
   const [roomMessage, setRoomMessage] = useState([]);
   const [activeUsers, setActiveUsers] = useState([]);
   const [currentRoom, setCurrentRoom] = useState("");
 
   const { username, room } = location.state.user;
+  const siteSize = isFullScreen ? fullScreen : {};
 
   useEffect(() => {
     socket.emit("joinRoom", { username, room });
@@ -42,6 +56,7 @@ const Chat = ({ location }) => {
     }
   };
 
+
   const handleMsgChange = (e) => {
     setMsg(e.target.value);
   };
@@ -63,7 +78,7 @@ const Chat = ({ location }) => {
       {!socket.connected ? (
         <Spinner />
       ) : (
-        <div className={classes.ChatContainer}>
+        <div className={classes.ChatContainer} style={siteSize.chatContainer}>
           <div className={classes.ChatHeader}>
             <div className={classes.Dots}>
               <i
@@ -145,7 +160,7 @@ const Chat = ({ location }) => {
                 </div>
               </div>
 
-              <form className={classes.InputArea}>
+              <form className={classes.InputArea} style={siteSize.inputArea}>
                 <div className={classes.InputWrapper}>
                   <input
                     type="text"
