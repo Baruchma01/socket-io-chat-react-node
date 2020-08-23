@@ -83,7 +83,7 @@ const Chat = ({ location }) => {
             <div>
               <p style={{ margin: 0 }}>Code Chat</p>
             </div>
-            <div>
+            <div style={{position:'relative', right: '5px'}}>
               <i className="fa fa-expand"></i>
             </div>
           </div>

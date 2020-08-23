@@ -29,6 +29,8 @@
     display: flex;
     gap: 5px;
     flex-wrap: wrap;
+    position: relative;
+    left: 5px;
 }
 
 .ChatSection {
@@ -103,7 +105,7 @@ p {
 .ButtomList a button {
     padding: 1.13em;
     background: #505d71;
-    color: #fff;
+    color: darkgray;
     border: 1px solid;
     cursor: pointer;
     width: 100%;
