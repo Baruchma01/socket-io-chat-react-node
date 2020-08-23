@@ -55,7 +55,10 @@ const Chat = ({ location }) => {
       setMsg("");
     }
   };
-
+  
+  const toggleFullScreen = () => {
+    setIsFullScreen(!isFullScreen);
+  }
 
   const handleMsgChange = (e) => {
     setMsg(e.target.value);
@@ -97,7 +100,7 @@ const Chat = ({ location }) => {
             <div>
               <p style={{ margin: 0 }}>Code Chat</p>
             </div>
-            <div style={{position:'relative', right: '5px'}}>
+            <div style={{position:'relative', right: '5px', cursor:'pointer'}} onClick={toggleFullScreen}>
               <i className="fa fa-expand"></i>
             </div>
           </div>
