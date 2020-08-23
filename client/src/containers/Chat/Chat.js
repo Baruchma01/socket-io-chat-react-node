@@ -21,17 +21,16 @@ const Chat = ({ location }) => {
     // Get message from the server
     socket.on("message", (message) => {
       setRoomMessage((state) => [...state, message]);
-      if (roomMessage.length > 0) {
         divRref.current.scrollIntoView({ behavior: "smooth" });
-      }
     });
-
     // Get room and users
     socket.on("roomUsers", ({ room, users }) => {
       setActiveUsers((state) => users);
       setCurrentRoom((state) => room);
     });
   }, []);
+
+
 
   const submitMessageHandler = (e) => {
     e.preventDefault();
@@ -126,7 +125,7 @@ const Chat = ({ location }) => {
                 <div className={classes.singleMsg}>
                   {(roomMessage || []).map((message, index) => {
                     return (
-                      <ul
+                      <ul ref={divRref}
                         key={index}
                         style={liGray}
                         className={classes.MessageArea}
