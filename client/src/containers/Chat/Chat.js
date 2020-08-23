@@ -84,7 +84,7 @@ const Chat = ({ location }) => {
               <p style={{ margin: 0 }}>Code Chat</p>
             </div>
             <div>
-              <i class="fa fa-expand"></i>
+              <i className="fa fa-expand"></i>
             </div>
           </div>
           <div className={classes.ChatSection}>
@@ -111,8 +111,7 @@ const Chat = ({ location }) => {
                 </div>
               </ul>
               <div className={classes.ButtomList}>
-                <i style={specialColor} className="fa fa-list-alt fa-xs"></i>
-                <p>Baruch Mashasha</p>
+                <button>Lobby</button>
               </div>
             </div>
 
@@ -123,16 +122,16 @@ const Chat = ({ location }) => {
 
               <div className={classes.MsgContainer}>
                 <div className={classes.singleMsg}>
-                  {(roomMessage || []).map((message) => {
+                  {(roomMessage || []).map((message, index) => {
                     return (
-                      <ul style={liGray} className={classes.MessageArea}>
+                      <ul key={index} style={liGray} className={classes.MessageArea}>
                         <li className={classes.MessageLi}>
                           <div className={classes.MsgName}>
-                            <span class="">{message.username}</span>
+                            <span className="">{message.username}</span>
                           </div>
                           <div className={classes.Msg}>
                             <p>{message.text}</p>
-                            <span class="msg-time">{message.time}</span>
+                            <span className="msg-time">{message.time}</span>
                           </div>
                         </li>
                       </ul>
@@ -141,11 +140,10 @@ const Chat = ({ location }) => {
                 </div>
               </div>
 
-              <div className={classes.InputArea}>
+              <form className={classes.InputArea}>
                 <div className={classes.InputWrapper}>
                   <input
                     type="text"
-                    value=""
                     placeholder="Enter Message"
                     value={msg}
                     onChange={handleMsgChange}
@@ -156,7 +154,7 @@ const Chat = ({ location }) => {
                   className={classes.BtnSubmit}
                   onClick={submitMessageHandler}
                 > Submit</button>
-              </div>
+              </form>
             </div>
           </div>
         </div>

@@ -91,8 +91,15 @@ p {
     display: flex;
     border-top: 2px solid #586476;
     align-items: center;
-    gap: 10px;
-    padding-left: 1rem;
+}
+
+.ButtomList button {
+    width: 100%;
+    padding: 1.13em;
+    background: #505d71;
+    color: #fff;
+    border: 1px solid;
+    cursor: pointer;
 }
 
 
@@ -113,6 +120,8 @@ p {
 
 .MsgContainer {
     height: 408px;
+    /* max-height: 310px; */
+    overflow-y: scroll;
 }
 
 .InputArea {
