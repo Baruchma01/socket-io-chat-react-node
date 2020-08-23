@@ -107,7 +107,6 @@ p {
 .MessageArea {
     list-style: none;
     display: flex;
-    justify-content: start;
     border-bottom: 1px solid #cfdae1;
     border-right: 1px solid #cfdae1;
 }
@@ -119,6 +118,9 @@ p {
 .InputArea {
     display: flex;
     flex-wrap: wrap;
+    background: #e4eaee;
+    padding: 6px;
+    overflow: hidden;
 }
 
 .InputWrapper {
@@ -129,6 +131,7 @@ p {
 
 .InputWrapper input {
     width: 100%;
+    border: none;
 }
 
 .BtnSubmit {
@@ -160,6 +163,9 @@ p {
     width: 80%;
     padding-left: 1rem;
     font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
 }
 
 .MsgName {
@@ -172,4 +178,8 @@ p {
 
 .Msg p {
     color: #000;
+    width: 50ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

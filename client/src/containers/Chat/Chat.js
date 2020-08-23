@@ -48,16 +48,16 @@ const Chat = ({ location }) => {
   };
 
   const greenDot = {
-    color: '#82cf85' 
-  }
+    color: "#82cf85",
+  };
 
   const specialColor = {
-    color: '#79889d'
-  }
+    color: "#79889d",
+  };
 
   const liGray = {
-    background: '#e4eaee'
-  }
+    background: "#e4eaee",
+  };
 
   return (
     <>
@@ -92,125 +92,73 @@ const Chat = ({ location }) => {
               <ul>
                 <div className={classes.List}>
                   <i style={specialColor} className="fa fa-list-alt fa-xs"></i>
-                  <li>Dashboard</li>
+                  <li>{currentRoom}</li>
                 </div>
                 <div className={classes.List}>
-                <i style={specialColor} className="fa fa-user fa-xs"></i>
+                  <i style={specialColor} className="fa fa-user fa-xs"></i>
                   <li>Team chat</li>
                 </div>
-                <div className={classes.List}>
-                <i style = {greenDot} className="fa fa-circle-o online fa-xs"></i>
-                  <li>baruch</li>
-                </div>
-                <div className={classes.List}>
-                <i style = {greenDot} className="fa fa-circle-o online fa-xs"></i>
-                  <li>moshe</li>
-                </div>
-                <div className={classes.List}>
-                <i style = {greenDot} className="fa fa-circle-o online fa-xs"></i>
-                  <li>eran</li>
+                <div style={{ width: "100%" }}>
+                  {(activeUsers || []).map((user) => (
+                    <div className={classes.List} key={user.id}>
+                      <i
+                        style={greenDot}
+                        className="fa fa-circle-o online fa-xs"
+                      ></i>
+                      <li>{user.username}</li>
+                    </div>
+                  ))}
                 </div>
               </ul>
               <div className={classes.ButtomList}>
-                  <i style={specialColor} className="fa fa-list-alt fa-xs"></i>
-                  <p>Baruch Mashasha</p>
-                </div>
+                <i style={specialColor} className="fa fa-list-alt fa-xs"></i>
+                <p>Baruch Mashasha</p>
+              </div>
             </div>
 
             <div className={classes.ChatArea}>
               <div className={classes.Title}>
-              <b>Conversation title</b>
+                <span>Conversation title</span>
               </div>
 
               <div className={classes.MsgContainer}>
-              <ul style={liGray} className={classes.MessageArea}>
-                <li className={classes.MessageLi}>
-
-                  <div className={classes.MsgName}>
-                  <span class="">Cucu Ionel</span>
-                  </div>
-
-                  <div className={classes.Msg}>
-                  <p>Hey, do you like the new interface? It's done with Font Awesome.</p>
-                  {/* <span class="msg-time">5:00 pm</span> */}
-                  </div>
-                </li>
-              </ul>
-
-              <ul className={classes.MessageArea}>
-                <li className={classes.MessageLi}>
-
-                  <div className={classes.MsgName}>
-                  <span class="">Baruch Ionel</span>
-                  </div>
-
-                  <div className={classes.Msg}>
-                  <p>Hey, all good.</p>
-                  {/* <span class="msg-time">5:00 pm</span> */}
-                  </div>
-                </li>
-              </ul>
+                <div className={classes.singleMsg}>
+                  {(roomMessage || []).map((message) => {
+                    return (
+                      <ul style={liGray} className={classes.MessageArea}>
+                        <li className={classes.MessageLi}>
+                          <div className={classes.MsgName}>
+                            <span class="">{message.username}</span>
+                          </div>
+                          <div className={classes.Msg}>
+                            <p>{message.text}</p>
+                            <span class="msg-time">{message.time}</span>
+                          </div>
+                        </li>
+                      </ul>
+                    );
+                  })}
+                </div>
               </div>
 
               <div className={classes.InputArea}>
                 <div className={classes.InputWrapper}>
-                <input type="text" value=""/>
+                  <input
+                    type="text"
+                    value=""
+                    placeholder="Enter Message"
+                    value={msg}
+                    onChange={handleMsgChange}
+                  />
                 </div>
 
-                <input className={classes.BtnSubmit} type="button" value="Submit"/>
+                <button
+                  className={classes.BtnSubmit}
+                  onClick={submitMessageHandler}
+                > Submit</button>
               </div>
             </div>
-
           </div>
-
-          {/* <header className={classes.ChatHeader}>
-            <h1>
-              <i className="fas fa-smile"></i> ChatCord
-            </h1>
-            <a href="/" className={classes.Btn}>
-              Leave Room
-            </a>
-          </header>
-          <main className={classes.ChatMain}>
-            <div className={classes.ChatSideBar}>
-              <h3>
-                <i className="fas fa-comments"></i> Room Name:
-              </h3>
-              <h2 id="room-name">{currentRoom}</h2>
-              <h3>
-                <i className="fas fa-users"></i> Users
-              </h3>
-              <div id="users">
-                {(activeUsers || []).map((user) => (
-                  <p key={user.id}>{user.username}</p>
-                ))}
-              </div>
-            </div>
-            <div className={classes.ChatMessage}>
-              {(roomMessage || []).map((message) => (
-                <div ref={divRref} key={Math.random()} className={classes.Message}>
-                  <p className={classes.Meta}>
-                    {message.username} <span>{message.time}</span>
-                  </p>
-                  <p className="text">{message.text}</p>
-                </div>
-              ))}
-            </div>
-          </main>
-          <div className={classes.ChatFormContainer}>
-            <form id="chat-form">
-              <input
-                id="msg"
-                type="text"
-                placeholder="Enter Message"
-                value={msg}
-                onChange={handleMsgChange}
-              />
-              <button className={classes.Btn} onClick={submitMessageHandler}>
-                <i className="fas fa-paper-plane"></i> Send
-              </button>
-            </form>
-          </div> */}
         </div>
       )}
     </>
