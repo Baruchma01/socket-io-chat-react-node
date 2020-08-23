@@ -111,7 +111,9 @@ const Chat = ({ location }) => {
                 </div>
               </ul>
               <div className={classes.ButtomList}>
-                <button>Lobby</button>
+                <a href="/" className={classes.Btn}>
+                  <button>Leave</button>
+                </a>
               </div>
             </div>
 
@@ -124,7 +126,11 @@ const Chat = ({ location }) => {
                 <div className={classes.singleMsg}>
                   {(roomMessage || []).map((message, index) => {
                     return (
-                      <ul key={index} style={liGray} className={classes.MessageArea}>
+                      <ul
+                        key={index}
+                        style={liGray}
+                        className={classes.MessageArea}
+                      >
                         <li className={classes.MessageLi}>
                           <div className={classes.MsgName}>
                             <span className="">{message.username}</span>
@@ -153,7 +159,10 @@ const Chat = ({ location }) => {
                 <button
                   className={classes.BtnSubmit}
                   onClick={submitMessageHandler}
-                > Submit</button>
+                >
+                  {" "}
+                  Submit
+                </button>
               </form>
             </div>
           </div>

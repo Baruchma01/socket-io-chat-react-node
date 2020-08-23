@@ -93,13 +93,17 @@ p {
     align-items: center;
 }
 
-.ButtomList button {
+.ButtomList a {
     width: 100%;
+}
+
+.ButtomList a button {
     padding: 1.13em;
     background: #505d71;
     color: #fff;
     border: 1px solid;
     cursor: pointer;
+    width: 100%;
 }
 
 
