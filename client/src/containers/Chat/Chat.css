@@ -21,6 +21,10 @@
     border-bottom: 1px solid #cfdae1;
 }
 
+.ChatHeader p {
+    color: #000;
+}
+
 .Dots {
     display: flex;
     gap: 5px;
@@ -31,7 +35,6 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    background-color: purple;
     flex: 10;
 }
 
