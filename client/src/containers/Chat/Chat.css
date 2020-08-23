@@ -14,7 +14,7 @@
 .ChatHeader {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
     align-items: center;
     flex: 1;
@@ -48,15 +48,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 50%;
-    background-color: #fff;
-}
-
-.RightTabs {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 25%;
+    width: 75%;
     background-color: #fff;
 }
 
@@ -118,6 +110,41 @@ p {
     justify-content: start;
     border-bottom: 1px solid #cfdae1;
     border-right: 1px solid #cfdae1;
+}
+
+.MsgContainer {
+    height: 408px;
+}
+
+.InputArea {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.InputWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+}
+
+.InputWrapper input {
+    width: 100%;
+}
+
+.BtnSubmit {
+    width: 20%;
+    background: #a0b4c0;
+    border: none;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 4px;
+    float: right;
+    height: 36px;
+    line-height: 30px;
+    cursor: pointer;
+    font-family: 'Open Sans', Arial, sans-serif;
+    outline: none;
 }
 
 .MessageLi {

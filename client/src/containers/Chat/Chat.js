@@ -121,6 +121,8 @@ const Chat = ({ location }) => {
               <div className={classes.Title}>
               <b>Conversation title</b>
               </div>
+
+              <div className={classes.MsgContainer}>
               <ul style={liGray} className={classes.MessageArea}>
                 <li className={classes.MessageLi}>
 
@@ -148,9 +150,17 @@ const Chat = ({ location }) => {
                   </div>
                 </li>
               </ul>
+              </div>
+
+              <div className={classes.InputArea}>
+                <div className={classes.InputWrapper}>
+                <input type="text" value=""/>
+                </div>
+
+                <input className={classes.BtnSubmit} type="button" value="Submit"/>
+              </div>
             </div>
 
-            <div className={classes.RightTabs}></div>
           </div>
 
           {/* <header className={classes.ChatHeader}>
