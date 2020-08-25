@@ -1,9 +1,14 @@
-const path = require("path");
 const express = require("express");
+const dotenv = require('dotenv');
+dotenv.config();
 const http = require("http");
 const socketio = require("socket.io");
 const formatMessage = require("./utils/message");
 const index = require("./routes/index");
+const connectDB = require("./config/db");
+const User = require("./models/User");
+const Message = require("./models/Message");
+
 
 const {
   userJoin,
@@ -14,6 +19,7 @@ const {
 const { error } = require("console");
 
 const app = express();
+connectDB();
 const server = http.createServer(app);
 const io = socketio(server);
 
@@ -26,9 +32,13 @@ io.on(
   "connection",
   (socket) => {
     socket.on("joinRoom", ({ username, room }) => {
-      console.log(socket.id);
       const user = userJoin(socket.id, username, room);
       socket.join(user.room);
+      const newUser = new User({
+        nickName: username
+      })
+       newUser.save().then(response => console.log(response))
+       .catch(err => console.log(err));
 
       // Welcome current user
       socket.emit("message", formatMessage(botName, "Welcome to Chat!"));
@@ -50,9 +60,17 @@ io.on(
 
     // Listen for chatMessage
     socket.on("chatMessage", (msg) => {
+      console.log(msg);
       console.log(socket.id);
       const user = getCurrentUser(socket.id);
       io.to(user.room).emit("message", formatMessage(user.username, msg));
+      const newMessage = new Message({
+        message: msg,
+        userName: user.username,
+        room: user.room
+      });
+      newMessage.save().then(response => console.log(response))
+       .catch(err => console.log(err));
     });
 
     //When client disconnect
