@@ -39,7 +39,11 @@ const Chat = ({ location }) => {
     });
     // Get room and users
     socket.on("roomUsers", ({ room, users }) => {
-      setActiveUsers((state) => users);
+      const usersWithColor = users.map(user => {
+        user.color = '#'+ Math.floor(Math.random()*16777215).toString(16);
+        return user;
+      })
+      setActiveUsers((state) => usersWithColor);
       setCurrentRoom((state) => room);
     });
   }, []);
@@ -64,10 +68,6 @@ const Chat = ({ location }) => {
     setMsg(e.target.value);
   };
 
-  const greenDot = {
-    color: "#82cf85",
-  };
-
   const specialColor = {
     color: "#79889d",
   };
@@ -76,6 +76,7 @@ const Chat = ({ location }) => {
     background: "#e4eaee",
   };
 
+  console.log(activeUsers);
   return (
     <>
       {!socket.connected ? (
@@ -119,7 +120,7 @@ const Chat = ({ location }) => {
                   {(activeUsers || []).map((user) => (
                     <div className={classes.List} key={user.id}>
                       <i
-                        style={greenDot}
+                        style={{color: user.color}}
                         className="fa fa-circle-o online fa-xs"
                       ></i>
                       <li>{user.username}</li>
