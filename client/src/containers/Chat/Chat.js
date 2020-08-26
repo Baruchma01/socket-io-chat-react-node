@@ -7,15 +7,14 @@ const socket = openSocket(process.env.REACT_APP_API_URI);
 const Chat = ({ location }) => {
   const fullScreen = {
     chatContainer: {
-      width: '100%',
-      margin: '0 auto',
-      height: '100vh'
+      width: "100%",
+      margin: "0 auto",
+      height: "100vh",
     },
     inputArea: {
-      marginTop: 'auto'
-    }
-
-  }
+      marginTop: "auto",
+    },
+  };
 
   const divRref = useRef(null);
   const [msg, setMsg] = useState("");
@@ -23,35 +22,34 @@ const Chat = ({ location }) => {
   const [roomMessage, setRoomMessage] = useState([]);
   const [activeUsers, setActiveUsers] = useState([]);
   const [currentRoom, setCurrentRoom] = useState("");
+  const [error, setError] = useState({ error: false, msg: "" });
 
   const { username, room } = location.state.user;
   const siteSize = isFullScreen ? fullScreen : {};
 
   useEffect(() => {
     socket.emit("joinRoom", { username, room });
-    socket.on('exception', (error) => {
-      console.log(error);
-   });
+    socket.on("exception", (error) => {
+      setError(() => ({ error: true, msg: error }));
+    });
   }, []);
 
   useEffect(() => {
     // Get message from the server
     socket.on("message", (message) => {
       setRoomMessage((state) => [...state, message]);
-        divRref.current.scrollIntoView({ behavior: "smooth" });
+      divRref.current.scrollIntoView({ behavior: "smooth" });
     });
     // Get room and users
     socket.on("roomUsers", ({ room, users }) => {
-      const usersWithColor = users.map(user => {
-        user.color = '#'+ Math.floor(Math.random()*16777215).toString(16);
+      const usersWithColor = users.map((user) => {
+        user.color = "#" + Math.floor(Math.random() * 16777215).toString(16);
         return user;
       });
       setActiveUsers((state) => usersWithColor);
       setCurrentRoom((state) => room);
     });
   }, []);
-
-
 
   const submitMessageHandler = (e) => {
     e.preventDefault();
@@ -62,10 +60,10 @@ const Chat = ({ location }) => {
       setMsg("");
     }
   };
-  
+
   const toggleFullScreen = () => {
     setIsFullScreen(!isFullScreen);
-  }
+  };
 
   const handleMsgChange = (e) => {
     setMsg(e.target.value);
@@ -79,9 +77,12 @@ const Chat = ({ location }) => {
     background: "#e4eaee",
   };
 
+  console.log(error);
   return (
     <>
-
+      {!socket.connected || error.error ? (
+        <Spinner />
+      ) : (
         <div className={classes.ChatContainer} style={siteSize.chatContainer}>
           <div className={classes.ChatHeader}>
             <div className={classes.Dots}>
@@ -101,7 +102,10 @@ const Chat = ({ location }) => {
             <div>
               <p style={{ margin: 0 }}>Code Chat</p>
             </div>
-            <div style={{position:'relative', right: '5px', cursor:'pointer'}} onClick={toggleFullScreen}>
+            <div
+              style={{ position: "relative", right: "5px", cursor: "pointer" }}
+              onClick={toggleFullScreen}
+            >
               <i className="fa fa-expand"></i>
             </div>
           </div>
@@ -120,7 +124,7 @@ const Chat = ({ location }) => {
                   {(activeUsers || []).map((user) => (
                     <div className={classes.List} key={user.id}>
                       <i
-                        style={{color: user.color}}
+                        style={{ color: user.color }}
                         className="fa fa-circle-o online fa-xs"
                       ></i>
                       <li>{user.username}</li>
@@ -144,7 +148,8 @@ const Chat = ({ location }) => {
                 <div className={classes.singleMsg}>
                   {(roomMessage || []).map((message, index) => {
                     return (
-                      <ul ref={divRref}
+                      <ul
+                        ref={divRref}
                         key={index}
                         style={liGray}
                         className={classes.MessageArea}
@@ -185,6 +190,7 @@ const Chat = ({ location }) => {
             </div>
           </div>
         </div>
+      )}
     </>
   );
 };

@@ -12,7 +12,7 @@ export default () => (
       alignItems: "center",
     }}
   >
-    <h1 style={{color:'cornflowerblue'}}>Sorry for the slow loading ... this is a free Heroku server :)</h1>
+    <h1 style={{color:'cornflowerblue'}}>Loading...)</h1>
     <img
       src={spinner}
       style={{
