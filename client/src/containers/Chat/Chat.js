@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import classes from "./Chat.css";
+import './Chat.css';
 import openSocket from "socket.io-client";
 import Spinner from "../../components/Spinner/Spinner";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const socket = openSocket(process.env.REACT_APP_API_URI);
 const Chat = ({ location }) => {
@@ -16,6 +18,7 @@ const Chat = ({ location }) => {
     },
   };
 
+
   const divRref = useRef(null);
   const [msg, setMsg] = useState("");
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -26,6 +29,8 @@ const Chat = ({ location }) => {
 
   const { username, room } = location.state.user;
   const siteSize = isFullScreen ? fullScreen : {};
+
+  const notify = () => toast.error('dasdasdasd');
 
   useEffect(() => {
     socket.emit("joinRoom", { username, room });
@@ -77,15 +82,19 @@ const Chat = ({ location }) => {
     background: "#e4eaee",
   };
 
-  console.log(error);
   return (
     <>
       {!socket.connected || error.error ? (
+        <>
+        <button onClick={notify}>NOTIFY</button>
         <Spinner />
+        <ToastContainer position="bottom-right"/>
+        </>
+        
       ) : (
-        <div className={classes.ChatContainer} style={siteSize.chatContainer}>
-          <div className={classes.ChatHeader}>
-            <div className={classes.Dots}>
+        <div className='ChatContainer' style={siteSize.chatContainer}>
+          <div className='ChatHeader'>
+            <div className='Dots'>
               <i
                 className="fa fa-circle fa-xs"
                 style={{ color: "#f57e7d" }}
@@ -109,20 +118,20 @@ const Chat = ({ location }) => {
               <i className="fa fa-expand"></i>
             </div>
           </div>
-          <div className={classes.ChatSection}>
-            <div className={classes.ConversationList}>
+          <div className='ChatSection'>
+            <div className='ConversationList'>
               <ul>
-                <div className={classes.List}>
+                <div className='List'>
                   <i style={specialColor} className="fa fa-list-alt fa-xs"></i>
                   <li>{currentRoom}</li>
                 </div>
-                <div className={classes.List}>
+                <div className='List'>
                   <i style={specialColor} className="fa fa-user fa-xs"></i>
                   <li>Team chat</li>
                 </div>
                 <div style={{ width: "100%" }}>
                   {(activeUsers || []).map((user) => (
-                    <div className={classes.List} key={user.id}>
+                    <div className='List' key={user.id}>
                       <i
                         style={{ color: user.color }}
                         className="fa fa-circle-o online fa-xs"
@@ -132,33 +141,33 @@ const Chat = ({ location }) => {
                   ))}
                 </div>
               </ul>
-              <div className={classes.ButtomList}>
-                <a href="/" className={classes.Btn}>
+              <div className='ButtomList'>
+                <a href="/" className='Btn'>
                   <button>Leave</button>
                 </a>
               </div>
             </div>
 
-            <div className={classes.ChatArea}>
-              <div className={classes.Title}>
+            <div className='ChatArea'>
+              <div className='Title'>
                 <span>Conversation title</span>
               </div>
 
-              <div className={classes.MsgContainer}>
-                <div className={classes.singleMsg}>
+              <div className='MsgContainer'>
+                <div className='singleMsg'>
                   {(roomMessage || []).map((message, index) => {
                     return (
                       <ul
                         ref={divRref}
                         key={index}
                         style={liGray}
-                        className={classes.MessageArea}
+                        className='MessageArea'
                       >
-                        <li className={classes.MessageLi}>
-                          <div className={classes.MsgName}>
+                        <li className='MessageLi'>
+                          <div className='MsgName'>
                             <span className="">{message.username}</span>
                           </div>
-                          <div className={classes.Msg}>
+                          <div className='Msg'>
                             <p>{message.text}</p>
                             <span className="msg-time">{message.time}</span>
                           </div>
@@ -169,8 +178,8 @@ const Chat = ({ location }) => {
                 </div>
               </div>
 
-              <form className={classes.InputArea} style={siteSize.inputArea}>
-                <div className={classes.InputWrapper}>
+              <form className='InputArea' style={siteSize.inputArea}>
+                <div className='InputWrapper'>
                   <input
                     type="text"
                     placeholder="Enter Message"
@@ -180,7 +189,7 @@ const Chat = ({ location }) => {
                 </div>
 
                 <button
-                  className={classes.BtnSubmit}
+                  className='BtnSubmit'
                   onClick={submitMessageHandler}
                 >
                   {" "}

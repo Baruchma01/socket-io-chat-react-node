@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import classes from "./Join.css";
+import './Join.css';
 import { useHistory } from "react-router-dom";
 
 const Join = () => {
@@ -30,18 +30,18 @@ const Join = () => {
 
 
   return (
-    <div className={classes.JoinContainer}>
-      <header className={classes.JoinHeader}>
+    <div className='JoinContainer'>
+      <header className='JoinHeader'>
         <h1>
           <i className="fas fa-comments"></i> DeveloperChat
         </h1>
       </header>
-      <main className={classes.JoinMain}>
-        <form className={classes.Form}>
-          <div className={classes.FormControl}>
-            <label className={classes.Label}>NickName</label>
+      <main className='JoinMain'>
+        <form className='Form'>
+          <div className='FormControl'>
+            <label className='Label'>NickName</label>
             <input
-              className={classes.Input}
+              className='Input'
               type="text"
               name="username"
               id="username"
@@ -51,10 +51,10 @@ const Join = () => {
               onChange={changeFormHandler}
             />
           </div>
-          <div className={classes.FormControl}>
-            <label className={classes.Label}>Choose Room</label>
+          <div className='FormControl'>
+            <label className='Label'>Choose Room</label>
             <select
-              className={classes.RoomSelect}
+              className='RoomSelect'
               name="room"
               id="room"
               value={joinFormField.room}
@@ -68,7 +68,7 @@ const Join = () => {
               <option value="Java">Java</option>
             </select>
           </div>
-          <button className={classes.JoinBtn} onClick={joinChatHandler}>Join Chat</button>
+          <button className='JoinBtn' onClick={joinChatHandler}>Join Chat</button>
         </form>
       </main>
     </div>
