@@ -29,6 +29,9 @@ const Chat = ({ location }) => {
 
   useEffect(() => {
     socket.emit("joinRoom", { username, room });
+    socket.on('exception', (error) => {
+      console.log(error);
+   });
   }, []);
 
   useEffect(() => {
@@ -42,7 +45,7 @@ const Chat = ({ location }) => {
       const usersWithColor = users.map(user => {
         user.color = '#'+ Math.floor(Math.random()*16777215).toString(16);
         return user;
-      })
+      });
       setActiveUsers((state) => usersWithColor);
       setCurrentRoom((state) => room);
     });
@@ -76,12 +79,9 @@ const Chat = ({ location }) => {
     background: "#e4eaee",
   };
 
-  console.log(activeUsers);
   return (
     <>
-      {!socket.connected ? (
-        <Spinner />
-      ) : (
+
         <div className={classes.ChatContainer} style={siteSize.chatContainer}>
           <div className={classes.ChatHeader}>
             <div className={classes.Dots}>
@@ -185,7 +185,6 @@ const Chat = ({ location }) => {
             </div>
           </div>
         </div>
-      )}
     </>
   );
 };

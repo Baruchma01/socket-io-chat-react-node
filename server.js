@@ -33,11 +33,14 @@ io.on(
   (socket) => {
     socket.on("joinRoom", ({ username, room }) => {
       const user = userJoin(socket.id, username, room);
+      if(user === null) {
+        return socket.emit('exception', {errorMessage: `Nick Name ${username} alrady exist`});
+      }
       socket.join(user.room);
       const newUser = new User({
         nickName: username
       })
-       newUser.save().then(response => console.log(response))
+       newUser.save()
        .catch(err => console.log(err));
 
       // Welcome current user
@@ -60,8 +63,6 @@ io.on(
 
     // Listen for chatMessage
     socket.on("chatMessage", (msg) => {
-      console.log(msg);
-      console.log(socket.id);
       const user = getCurrentUser(socket.id);
       io.to(user.room).emit("message", formatMessage(user.username, msg));
       const newMessage = new Message({
@@ -69,7 +70,7 @@ io.on(
         userName: user.username,
         room: user.room
       });
-      newMessage.save().then(response => console.log(response))
+      newMessage.save()
        .catch(err => console.log(err));
     });
 

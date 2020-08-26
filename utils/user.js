@@ -3,6 +3,10 @@ const users = [];
 // Join user to chat
 const userJoin = (id, username, room) => {
     const user = {id, username, room};
+    const foundUser = users.find(({username, room}) => username === user.username && room === user.room);
+    if(foundUser !== undefined) {
+        return null;
+    }
     users.push(user);
     return user;
 }
