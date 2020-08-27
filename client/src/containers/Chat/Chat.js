@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import './Chat.css';
+import "./Chat.css";
 import openSocket from "socket.io-client";
 import Spinner from "../../components/Spinner/Spinner";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const socket = openSocket(process.env.REACT_APP_API_URI);
 const Chat = ({ location }) => {
@@ -18,25 +18,31 @@ const Chat = ({ location }) => {
     },
   };
 
-
   const divRref = useRef(null);
   const [msg, setMsg] = useState("");
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [roomMessage, setRoomMessage] = useState([]);
   const [activeUsers, setActiveUsers] = useState([]);
   const [currentRoom, setCurrentRoom] = useState("");
-  const [error, setError] = useState({ error: false, msg: "" });
+  const [error, setError] = useState({ error: false, msg: "", redirect: "" });
 
   const { username, room } = location.state.user;
   const siteSize = isFullScreen ? fullScreen : {};
 
-  const notify = () => toast.error('dasdasdasd');
+  const notify = (msg) => {
+    return toast(msg);
+  };
+
+  useEffect(() => {
+    socket.on("exception", (error) => {
+      console.log("XD");
+      setError(() => ({ error: true, msg: error, redirect: false }));
+      notify(error.errorMessage);
+    });
+  }, []);
 
   useEffect(() => {
     socket.emit("joinRoom", { username, room });
-    socket.on("exception", (error) => {
-      setError(() => ({ error: true, msg: error }));
-    });
   }, []);
 
   useEffect(() => {
@@ -86,15 +92,28 @@ const Chat = ({ location }) => {
     <>
       {!socket.connected || error.error ? (
         <>
-        <button onClick={notify}>NOTIFY</button>
-        <Spinner />
-        <ToastContainer position="bottom-right"/>
+          <Spinner />
+          <ToastContainer
+            position="top-center"
+            autoClose={false}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+          <div className="ChangeNickName">
+            <a href="/" className="BtnNickName">
+              <button className='LogOutBtn'>Chane Nick Name</button>
+            </a>
+          </div>
         </>
-        
       ) : (
-        <div className='ChatContainer' style={siteSize.chatContainer}>
-          <div className='ChatHeader'>
-            <div className='Dots'>
+        <div className="ChatContainer" style={siteSize.chatContainer}>
+          <div className="ChatHeader">
+            <div className="Dots">
               <i
                 className="fa fa-circle fa-xs"
                 style={{ color: "#f57e7d" }}
@@ -118,20 +137,20 @@ const Chat = ({ location }) => {
               <i className="fa fa-expand"></i>
             </div>
           </div>
-          <div className='ChatSection'>
-            <div className='ConversationList'>
+          <div className="ChatSection">
+            <div className="ConversationList">
               <ul>
-                <div className='List'>
+                <div className="List">
                   <i style={specialColor} className="fa fa-list-alt fa-xs"></i>
                   <li>{currentRoom}</li>
                 </div>
-                <div className='List'>
+                <div className="List">
                   <i style={specialColor} className="fa fa-user fa-xs"></i>
                   <li>Team chat</li>
                 </div>
                 <div style={{ width: "100%" }}>
                   {(activeUsers || []).map((user) => (
-                    <div className='List' key={user.id}>
+                    <div className="List" key={user.id}>
                       <i
                         style={{ color: user.color }}
                         className="fa fa-circle-o online fa-xs"
@@ -141,33 +160,33 @@ const Chat = ({ location }) => {
                   ))}
                 </div>
               </ul>
-              <div className='ButtomList'>
-                <a href="/" className='Btn'>
+              <div className="ButtomList">
+                <a href="/" className="Btn">
                   <button>Leave</button>
                 </a>
               </div>
             </div>
 
-            <div className='ChatArea'>
-              <div className='Title'>
+            <div className="ChatArea">
+              <div className="Title">
                 <span>Conversation title</span>
               </div>
 
-              <div className='MsgContainer'>
-                <div className='singleMsg'>
+              <div className="MsgContainer">
+                <div className="singleMsg">
                   {(roomMessage || []).map((message, index) => {
                     return (
                       <ul
                         ref={divRref}
                         key={index}
                         style={liGray}
-                        className='MessageArea'
+                        className="MessageArea"
                       >
-                        <li className='MessageLi'>
-                          <div className='MsgName'>
+                        <li className="MessageLi">
+                          <div className="MsgName">
                             <span className="">{message.username}</span>
                           </div>
-                          <div className='Msg'>
+                          <div className="Msg">
                             <p>{message.text}</p>
                             <span className="msg-time">{message.time}</span>
                           </div>
@@ -178,8 +197,8 @@ const Chat = ({ location }) => {
                 </div>
               </div>
 
-              <form className='InputArea' style={siteSize.inputArea}>
-                <div className='InputWrapper'>
+              <form className="InputArea" style={siteSize.inputArea}>
+                <div className="InputWrapper">
                   <input
                     type="text"
                     placeholder="Enter Message"
@@ -188,10 +207,7 @@ const Chat = ({ location }) => {
                   />
                 </div>
 
-                <button
-                  className='BtnSubmit'
-                  onClick={submitMessageHandler}
-                >
+                <button className="BtnSubmit" onClick={submitMessageHandler}>
                   {" "}
                   Submit
                 </button>

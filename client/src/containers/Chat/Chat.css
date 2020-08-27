@@ -201,3 +201,24 @@ p {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+.ChangeNickName {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.BtnNickName {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration:none;
+}
+
+.LogOutBtn {
+    padding: 0.70rem 1rem;
+    cursor: pointer;
+    background-color: darkcyan;
+    color: white;
+}
