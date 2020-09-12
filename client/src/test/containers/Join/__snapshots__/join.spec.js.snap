@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MyComponent should render Join component 1`] = `
+<div
+  className="JoinContainer"
+>
+  <header
+    className="JoinHeader"
+  >
+    <h1>
+      <i
+        className="fas fa-comments"
+      />
+       DeveloperChat
+    </h1>
+  </header>
+  <main
+    className="JoinMain"
+  >
+    <form
+      className="Form"
+    >
+      <div
+        className="FormControl"
+      >
+        <label
+          className="Label"
+        >
+          NickName
+        </label>
+        <input
+          className="Input"
+          id="username"
+          name="username"
+          onChange={[Function]}
+          placeholder="Enter nickname..."
+          required={true}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="FormControl"
+      >
+        <label
+          className="Label"
+        >
+          Choose Room
+        </label>
+        <select
+          className="RoomSelect"
+          id="room"
+          name="room"
+          onChange={[Function]}
+          value="JavaScript"
+        >
+          <option
+            value="JavaScript"
+          >
+            JavaScript
+          </option>
+          <option
+            value="Python"
+          >
+            Python
+          </option>
+          <option
+            value="PHP"
+          >
+            PHP
+          </option>
+          <option
+            value="C#"
+          >
+            C#
+          </option>
+          <option
+            value="Ruby"
+          >
+            Ruby
+          </option>
+          <option
+            value="Java"
+          >
+            Java
+          </option>
+        </select>
+      </div>
+      <button
+        className="JoinBtn"
+        onClick={[Function]}
+      >
+        Join Chat
+      </button>
+    </form>
+  </main>
+</div>
+`;
