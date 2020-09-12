@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MyComponent should render Join component 1`] = `
+exports[`JoinComponent should render Join component 1`] = `
 <div
   className="JoinContainer"
 >

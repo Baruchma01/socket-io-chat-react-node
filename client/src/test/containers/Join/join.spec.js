@@ -10,7 +10,7 @@ jest.mock("react-router-dom", () => ({
   }),
 }));
 
-describe("MyComponent", () => {
+describe("JoinComponent", () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallow(<Join />);

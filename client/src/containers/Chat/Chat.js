@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Chat.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import openSocket from "socket.io-client";
 import Spinner from "../../components/Spinner/Spinner";
 import { toast, ToastContainer } from "react-toastify";
@@ -34,14 +35,6 @@ const Chat = ({ location }) => {
   };
 
   useEffect(() => {
-    socket.on("exception", (error) => {
-      console.log("XD");
-      setError(() => ({ error: true, msg: error, redirect: false }));
-      notify(error.errorMessage);
-    });
-  }, []);
-
-  useEffect(() => {
     socket.emit("joinRoom", { username, room });
   }, []);
 
@@ -59,6 +52,14 @@ const Chat = ({ location }) => {
       });
       setActiveUsers((state) => usersWithColor);
       setCurrentRoom((state) => room);
+    });
+  }, []);
+
+  useEffect(() => {
+    socket.on("exception", (error) => {
+      console.log("XD");
+      setError(() => ({ error: true, msg: error, redirect: false }));
+      notify(error.errorMessage);
     });
   }, []);
 
@@ -106,7 +107,7 @@ const Chat = ({ location }) => {
           />
           <div className="ChangeNickName">
             <a href="/" className="BtnNickName">
-              <button className='LogOutBtn'>Chane Nick Name</button>
+              <button className="LogOutBtn">Chane Nick Name</button>
             </a>
           </div>
         </>

@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> should render Join component with location props 1`] = `
+<Fragment>
+  <_default />
+  <ToastContainer
+    autoClose={false}
+    closeButton={[Function]}
+    closeOnClick={true}
+    draggable={true}
+    draggablePercent={80}
+    hideProgressBar={false}
+    newestOnTop={false}
+    pauseOnFocusLoss={true}
+    pauseOnHover={true}
+    position="top-center"
+    role="alert"
+    rtl={false}
+    transition={[Function]}
+  />
+  <div
+    className="ChangeNickName"
+  >
+    <a
+      className="BtnNickName"
+      href="/"
+    >
+      <button
+        className="LogOutBtn"
+      >
+        Chane Nick Name
+      </button>
+    </a>
+  </div>
+</Fragment>
+`;
