@@ -1,6 +1,6 @@
 const users = [];
 
-// Join user to chat
+// Join user to chat and update the array
 const userJoin = (id, username, room) => {
     const user = {id, username, room};
     const foundUser = users.find(({username, room}) => username === user.username && room === user.room);

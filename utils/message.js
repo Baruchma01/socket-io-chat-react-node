@@ -1,5 +1,6 @@
 const moment = require("moment");
 
+// format message and time
 const formatMessage = (username, text) => {
   return {
     username,
